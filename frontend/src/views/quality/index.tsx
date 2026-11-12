@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/quality'
 const columns = [
@@ -95,7 +95,7 @@ export default function QualityView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('质量规则登记入口尚未接入审批流')}>
             登记质量规则
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出数据质量清单
           </button>
         </div>

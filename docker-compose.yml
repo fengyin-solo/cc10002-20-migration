@@ -11,3 +11,16 @@ services:
       - "5173:5173"
     depends_on:
       - backend
+  # 生产形态验收：前端构建产物 + nginx 子路径部署
+  # 用法：docker compose --profile prod up frontend-prod，访问 http://127.0.0.1:8080/metric-insight/
+  frontend-prod:
+    profiles: ["prod"]
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.prod
+    ports:
+      - "8080:80"
+    environment:
+      API_UPSTREAM: backend:8000
+    depends_on:
+      - backend

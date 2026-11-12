@@ -9,7 +9,7 @@
 
 ```text
 .
-├── frontend/                 React + Vite + TypeScript 前端
+├── frontend/                 React + Vite 7 + TypeScript 前端
 │   ├── src/views/            每个业务模块一个页面
 │   ├── src/api/              统一请求封装
 │   ├── src/stores/           会话与筛选状态
@@ -18,6 +18,7 @@
 │   ├── app/routers/          每个业务模块一组接口
 │   ├── app/services/         业务规则与状态流转
 │   └── app/store.py          内存数据仓库与示例数据
+├── deploy/                   子路径部署：nginx 配置、幂等发布脚本、验收工具
 ├── .gitignore
 └── docker-compose.yml
 ```
@@ -36,14 +37,28 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 ### 前端
 
+要求 Node `^20.19.0 || >=22.12.0`（Vite 7 与 @vitejs/plugin-react 5 的硬性要求，见 `frontend/.nvmrc`）。
+
 ```bash
 cd frontend
-npm install
+npm ci
 npm run dev
 ```
 
-前端默认监听 `http://127.0.0.1:5173/`，dev server 不会自动打开浏览器，
+前端默认监听 `http://127.0.0.1:5173/`（根路径），dev server 不会自动打开浏览器，
 需要自己访问。`/api` 由 vite 代理到后端 `http://127.0.0.1:8000`。
+
+### 生产构建与子路径部署
+
+```bash
+cd frontend
+npm run build        # 按 .env.production 的 VITE_BASE_PATH=/metric-insight/ 出包
+npm run preview      # 本地以子路径形态验收构建产物
+```
+
+正式环境把同一前端部署在反向代理的路径前缀 `/metric-insight/` 下，
+旧根入口的历史 URL 由反代 301 映射到新前缀，API 始终走根路径 `/api`。
+部署配置、幂等发布与验收清单见 [deploy/README.md](deploy/README.md)。
 
 ## 业务模块
 
@@ -70,7 +85,7 @@ npm run dev
 
 ## 约定
 
-- 每个模块的前端页面在 `frontend/src/views/<模块>/index.vue`，后端接口在
+- 每个模块的前端页面在 `frontend/src/views/<模块>/index.tsx`，后端接口在
   `backend/app/routers/<模块>.py`，业务规则在 `backend/app/services/<模块>.py`。
 - 列表接口统一返回 `{ items, total, page, size }`，动作接口统一返回 `{ ok, message }`。
 - 状态流转只允许在 `app/services` 里改，路由层不做业务判断。

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/datasource'
 const columns = [
@@ -95,7 +95,7 @@ export default function DatasourceView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('数据源配置登记入口尚未接入审批流')}>
             登记数据源配置
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出数据源连接清单
           </button>
         </div>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/dashboard'
 const columns = [
@@ -95,7 +95,7 @@ export default function DashboardView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('看板配置登记入口尚未接入审批流')}>
             登记看板配置
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出分析看板清单
           </button>
         </div>

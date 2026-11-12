@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/export'
 const columns = [
@@ -97,7 +97,7 @@ export default function ExportView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('导出任务登记入口尚未接入审批流')}>
             登记导出任务
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出数据导出清单
           </button>
         </div>

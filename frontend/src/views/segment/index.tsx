@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/segment'
 const columns = [
@@ -95,7 +95,7 @@ export default function SegmentView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('圈选规则登记入口尚未接入审批流')}>
             登记圈选规则
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出人群圈选清单
           </button>
         </div>

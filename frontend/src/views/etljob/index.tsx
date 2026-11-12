@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/etljob'
 const columns = [
@@ -97,7 +97,7 @@ export default function EtljobView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('加工任务登记入口尚未接入审批流')}>
             登记加工任务
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出ETL任务清单
           </button>
         </div>

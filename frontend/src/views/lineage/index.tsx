@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/lineage'
 const columns = [
@@ -95,7 +95,7 @@ export default function LineageView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('血缘关系登记入口尚未接入审批流')}>
             登记血缘关系
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出数据血缘清单
           </button>
         </div>

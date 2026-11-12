@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/abtest'
 const columns = [
@@ -97,7 +97,7 @@ export default function AbtestView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('实验方案登记入口尚未接入审批流')}>
             登记实验方案
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出AB实验清单
           </button>
         </div>

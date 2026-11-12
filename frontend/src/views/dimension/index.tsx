@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { request } from '@/api/client'
+import { apiUrl, request } from '@/api/client'
 
 const ENDPOINT = '/api/dimension'
 const columns = [
@@ -95,7 +95,7 @@ export default function DimensionView() {
           <button className="btn primary" type="button" onClick={() => setErrorMessage('分析维度登记入口尚未接入审批流')}>
             登记分析维度
           </button>
-          <button className="btn" type="button" onClick={() => window.open(`${ENDPOINT}/export`, '_blank')}>
+          <button className="btn" type="button" onClick={() => window.open(apiUrl(`${ENDPOINT}/export`), '_blank')}>
             导出维度管理清单
           </button>
         </div>
